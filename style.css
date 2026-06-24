@@ -1,0 +1,641 @@
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/Inter_18pt-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("assets/fonts/Inter_18pt-Bold.ttf");
+  font-weight: 800;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter";
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("assets/images/Cozy Cafe.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 100px;
+
+  transition: background-image 0.3s ease;
+}
+
+/* Time-container */
+.time-container {
+  gap: 30px;
+  display: flex; /* kích hoạt flexbox */
+  flex-direction: column; /* xếp con theo chiều dọc: tabs → clock → controls */
+  align-items: center; /* khi direction=column, align-items căn NGANG → ra giữa */
+}
+
+.mode-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mode-tabs button {
+  border: 1px solid white;
+  padding: 10px 18px;
+  border-radius: 30px;
+  background-color: transparent;
+  color: white;
+  font-size: 20px;
+  font-weight: 550;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.mode-tabs button:hover {
+  background-color: white;
+  color: black;
+}
+
+.mode-tabs button.active {
+  background-color: white;
+  color: black;
+}
+
+.clock {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1px);
+  border-radius: 30px;
+  padding: 10px 15px;
+  width: 330px;
+  text-align: center;
+}
+
+#timer-display {
+  font-size: 100px;
+  font-weight: 550;
+  color: white;
+  font-variant-numeric: tabular-nums;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#btn-start-pause {
+  border: 1px solid white;
+  background-color: white;
+  color: black;
+  border-radius: 30px;
+  font-size: 22px;
+  font-weight: 550;
+  padding: 8px 0;
+  width: 120px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+#btn-start-pause:hover {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+#btn-reset,
+#btn-setting {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Setting-overlay */
+.setting-overlay {
+  display: none;
+}
+
+.setting-overlay.open {
+  z-index: 999;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  justify-content: center;
+  align-items: center;
+}
+.setting-box {
+  position: relative;
+
+  width: 44%;
+  background: black;
+  border-radius: 30px;
+  padding: 25px 40px;
+}
+
+#btn-close-x {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+
+  background: none;
+  border: none;
+  color: #ffb3c6;
+  font-size: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#btn-close-x:hover {
+  color: #ff2d78;
+}
+
+.setting-body {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.setting-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 25%;
+  margin-left: 5px;
+}
+
+.setting-tab {
+  display: inline-block;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #ff2d78;
+  text-align: left;
+  background: none;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 10px 0px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.setting-tab:hover {
+  color: #ffb3c6;
+}
+
+.setting-tab.active {
+  border-bottom: 2px solid white;
+}
+
+.setting-content {
+  width: 75%;
+}
+
+/* Ẩn hiện content trong setting */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+/* /Ẩn hiện content trong setting */
+
+.setting-label {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 10px 0px;
+}
+
+#theme-select {
+  border: 1px solid #9e9e9e;
+  background: black;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  width: 100%;
+  padding: 7px 35px 7px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#theme-select:focus {
+  outline: none;
+  border: 1px solid white;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.select-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.toggle-row {
+  margin: 20px 0px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 16px;
+  margin-top: 1px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #9e9e9e;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+  background-color: #ff2d78;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.author {
+  margin-top: 220px;
+}
+
+.setting-footnote {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9e9e9e;
+}
+
+.setting-footnote a {
+  color: #ffb3c6;
+  text-decoration: underline;
+}
+
+.setting-footnote a:hover {
+  color: #ff2d78;
+}
+
+.setting-footer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: end;
+  gap: 15px;
+  margin-bottom: 2px;
+}
+
+.quote {
+  margin-top: 5px;
+}
+
+/* css content Timer */
+.timer-input-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.timer-input-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+input[type="number"] {
+  background: black;
+  color: white;
+  font-weight: 600;
+  border: 1px solid #9e9e9e;
+  width: 85px;
+  padding: 7px;
+  margin-top: 6px;
+  border-radius: 4px;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border: 1px solid white;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.pomodoro-sequence {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/* css content Sound */
+#content-sound {
+  width: 80%;
+}
+
+#sound-select {
+  border: 1px solid #9e9e9e;
+  background: black;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  width: 100%;
+  padding: 7px 35px 7px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#sound-select:focus {
+  outline: none;
+  border: 1px solid white;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.volume-slider-container {
+  width: 100%;
+  padding: 5px 0;
+}
+
+#volume-slider {
+  -webkit-appearance: none; /* Xóa style mặc định của trình duyệt */
+  appearance: none;
+  width: 100%;
+  height: 6px; /* Độ mảnh của thanh trượt */
+  background: #ffffff; /* Màu nền thanh trượt */
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px; /* Chiều rộng nút tròn */
+  height: 16px; /* Chiều cao nút tròn */
+  border-radius: 50%; /* Làm tròn nút */
+  background: #ffffff; /* Màu nút tròn */
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+#volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+/* css content Music */
+.playlist-container {
+  height: 180px;
+  overflow-y: auto;
+  border: 1px solid #9e9e9e;
+  border-radius: 4px;
+  margin: 10px 0px;
+}
+
+.song-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 5px;
+  margin: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.selected {
+  border-left: 3px solid #ffb3c6;
+}
+
+.song-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.song-name {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.song-duration {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.music-controls {
+  margin-top: 15px;
+}
+.btn-upload {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ff2d78;
+  background: #ff2d78;
+  color: black;
+  padding: 6px 15px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-upload:hover {
+  border: 1px solid #ff2d78;
+  background: black;
+  color: #ff2d78;
+}
+
+#btn-music-delete {
+  margin-left: 8px;
+  border: 1px solid #ff2d78;
+  background: black;
+  color: #ff2d78;
+  padding: 6px 15px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#btn-music-delete:hover {
+  background: #ff2d78;
+  color: white;
+}
+
+#music-upload {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* css footer của hộp thoại setting */
+#btn-close {
+  border: 1px solid #9e9e9e;
+  background: #9e9e9e;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+
+#btn-close:hover {
+  background: #616161;
+  border: 1px solid #616161;
+}
+
+#btn-save {
+  border: 1px solid white;
+  background: white;
+  color: black;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+
+#btn-save:hover {
+  border: 1px solid #ffb3c6;
+  background: #ffb3c6;
+}
+
+/* Bottom-bar */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 70px;
+}
+
+.media-player {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #ffb3c6;
+  padding: 8px;
+  border-radius: 15px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
+#music-image {
+  width: 60px;
+  height: 60px;
+  background-image: url("assets/images/media-image/vinyl.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#music-name {
+  color: black;
+  margin-left: 2px;
+  font-weight: 600;
+}
+
+.player-button {
+  display: flex;
+  gap: 8px;
+}
+
+.player-button button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: #ff2d78;
+  font-size: 18px;
+}
+
+/* @keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  animation-name: spin;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+} */
+
+/* .task-note {
+  border: 2px solid red;
+} */

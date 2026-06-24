@@ -1,0 +1,203 @@
+<!-- Giao diện người dùng nhìn thấy - Bộ khung HTML -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>In The Mood For Study</title>
+    <!-- Custom Styling -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="fontawesome/css/all.min.css" />
+  </head>
+  <body>
+    <!-- Time container -->
+    <div class="time-container">
+      <div class="mode-tabs">
+        <button id="btn-pomodoro">pomodoro</button>
+        <button id="btn-short-break">short break</button>
+        <button id="btn-long-break">long break</button>
+      </div>
+      <div class="clock">
+        <h1 id="timer-display"></h1>
+      </div>
+      <div class="controls">
+        <button id="btn-start-pause">start</button>
+        <button id="btn-reset">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <button id="btn-setting">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /Time container -->
+
+    <!-- Setting overlay -->
+    <div class="setting-overlay">
+      <div class="setting-box">
+        <button id="btn-close-x">&times;</button>
+        <div class="setting-body">
+          <!-- cột trái: menu -->
+          <div class="setting-sidebar">
+            <button class="setting-tab" id="btn-setting-general">
+              General
+            </button>
+            <button class="setting-tab" id="btn-setting-timer">Timer</button>
+            <button class="setting-tab" id="btn-setting-sound">Sound</button>
+            <button class="setting-tab" id="btn-setting-music">Music</button>
+          </div>
+          <!-- cột phải: nội dung -->
+          <div class="setting-content">
+            <!-- nội dung tab sẽ hiện ở đây -->
+            <!-- nội dung tab General -->
+            <div id="content-general" class="tab-content">
+              <p class="setting-label">Select theme:</p>
+              <div class="select-wrapper">
+                <select id="theme-select">
+                  <option value="cozy">Cozy Café</option>
+                  <option value="corner">Corner</option>
+                  <option value="countryside">Countryside</option>
+                  <option value="ocean">Ocean Sunset</option>
+                  <option value="cat">Cat</option>
+                  <option value="saigon">Saigon Night</option>
+                  <option value="rainy">Rainy Day</option>
+                  <option value="mango">Mango</option>
+
+                  <option value="starry">Starry Night</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-icon"></i>
+              </div>
+
+              <div class="toggle-row">
+                <label class="switch">
+                  <input type="checkbox" id="toggle-auto-change" />
+                  <span class="slider"></span>
+                </label>
+                <p class="setting-label">Change background each session</p>
+              </div>
+
+              <div class="author">
+                <p class="setting-footnote">
+                  My Github:
+                  <a
+                    href="https://github.com/khoahdinh"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >@khoahdinh</a
+                  >
+                </p>
+                <p class="setting-footnote quote">
+                  A little project, built step by step with guidance from many
+                  sources online.
+                </p>
+              </div>
+            </div>
+            <!-- nội dung tab Timer -->
+            <div id="content-timer" class="tab-content">
+              <div class="timer-input-group">
+                <div class="timer-input-time">
+                  <p class="setting-label">Pomodoro</p>
+                  <input type="number" id="input-pomodoro" placeholder="25" />
+                  <p class="setting-footnote">minutes</p>
+                </div>
+                <div class="timer-input-time">
+                  <p class="setting-label">Short Break</p>
+                  <input type="number" id="input-short-break" placeholder="5" />
+                  <p class="setting-footnote">minutes</p>
+                </div>
+                <div class="timer-input-time">
+                  <p class="setting-label">Long Break</p>
+                  <input type="number" id="input-long-break" placeholder="15" />
+                  <p class="setting-footnote">minutes</p>
+                </div>
+              </div>
+              <div class="pomodoro-sequence">
+                <p class="setting-label">Long break after:</p>
+                <input type="number" id="input-rounds" placeholder="4" />
+                <p class="setting-footnote">pomodoros</p>
+              </div>
+            </div>
+            <!-- nội dung tab Sound -->
+            <div id="content-sound" class="tab-content">
+              <p class="setting-label">Select alert sound:</p>
+              <div class="select-wrapper">
+                <select id="sound-select">
+                  <option value="bell">Bell</option>
+                  <option value="ding">Ding</option>
+                  <option value="chime">Chime</option>
+                  <option value="birds">Birds</option>
+                  <option value="lofi">Lofi</option>
+                </select>
+                <i class="fa-solid fa-chevron-down select-icon"></i>
+              </div>
+
+              <div class="toggle-row">
+                <label class="switch">
+                  <input type="checkbox" id="toggle-sound-enabled" />
+                  <span class="slider"></span>
+                </label>
+                <p class="setting-label">Enable sound alert</p>
+              </div>
+
+              <p class="setting-label">Alert volume</p>
+              <div class="volume-slider-container">
+                <input
+                  type="range"
+                  id="volume-slider"
+                  min="0"
+                  max="100"
+                  value="80"
+                />
+              </div>
+            </div>
+            <!-- nội dung tab Music -->
+            <div id="content-music" class="tab-content">
+              <p class="setting-label">Playlist</p>
+
+              <div class="playlist-container"></div>
+
+              <div class="music-controls">
+                <label for="music-upload" class="btn-upload">Upload</label>
+                <input type="file" id="music-upload" />
+                <button id="btn-music-delete">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="setting-footer">
+          <button id="btn-close">Close</button>
+          <button id="btn-save">Save changes</button>
+        </div>
+      </div>
+    </div>
+    <!-- /Setting overlay -->
+
+    <!-- Bottom bar -->
+    <div class="bottom-bar">
+      <div class="media-player">
+        <div id="music-image"></div>
+        <div class="music-info">
+          <p id="music-name">Music name</p>
+          <div class="player-button">
+            <button id="btn-previous-player">
+              <i class="fa-solid fa-backward-step"></i>
+            </button>
+            <button id="btn-start-pause-player">
+              <i class="fa-solid fa-circle-play"></i>
+            </button>
+            <button id="btn-next-player">
+              <i class="fa-solid fa-forward-step"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Bottom bar -->
+
+    <!-- Renderer -->
+    <script src="renderer.js"></script>
+    <!-- /Renderer -->
+  </body>
+</html>
