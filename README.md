@@ -53,10 +53,11 @@ The packaged `.exe` will show up in `dist/`.
 
 - **Uploaded playlists don't survive a restart.** Uploaded tracks use temporary blob URLs (`URL.createObjectURL`), which die with the session — they're never written to disk. The correct fix is routing uploads through Electron's IPC to copy files into `app.getPath("userData")`. Flagged here instead of quietly ignored, because pretending a limitation doesn't exist is worse than naming it.
 
-## 🗺️ Roadmap
+## 📝 Lessons Learned
 
-- [ ] localStorage persistence for Pomodoro & Sound settings
-- [ ] Persistent playlist storage (via IPC, see above)
+- **Cutting scope is a feature, not a failure.** Shuffle, drag-and-drop playlist reordering, and a couple of other nice-to-haves got cut deliberately — not because they were hard, but because they weren't worth the complexity for this app's actual use case.
+- **Naming a limitation beats hiding it.** The blob-URL playlist issue could've been quietly ignored. Writing it down, plus the correct fix (IPC), felt more honest than pretending the app was 100% done.
+- **Reasoning through bugs beats memorizing fixes — but it's worth doing it faster.** Working through this project, the pattern that stood out most was preferring to _understand_ a bug (why two animation loops fight over the same variable, why a blob URL dies on restart) over just pasting a fix. That's the right instinct for actually learning. The next level up is trusting that instinct enough to reason through the first guess with more confidence, instead of double-checking every step before committing to it.
 
 ## 📄 License
 
@@ -64,5 +65,7 @@ ISC
 
 ## 🙋 Author
 
-**khoahdinh** — first-year university student, learning JavaScript one feature at a time.
-Feedback, bug reports, and roasts welcome via [Issues](../../issues).
+## 🙋 Author
+
+**khoahdinh** — built this while learning JavaScript and Electron from scratch.
+Feedback and bug reports welcome via [Issues](../../issues).
