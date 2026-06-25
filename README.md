@@ -8,17 +8,12 @@ A minimalist desktop Pomodoro timer and music player, built with Electron and va
 
 ---
 
-![screenshot](./assets/images/Screenshot.png)
-![screenshot](./assets/images/Screenshot_2.png)
-![screenshot](./assets/images/Screenshot3.png)
-
 ## ✨ Features
 
 ### ⏱️ Pomodoro Timer
 
 - Full pomodoro cycle: **study → short break → long break** (after N rounds)
 - Fully customizable intervals — set your own study/break lengths and round count
-- Round tracking display (e.g. "Round 2 / 4")
 - Robust timer logic that handles settings changes mid-session without breaking the cycle count
 
 ### 🔊 Sound
@@ -45,9 +40,8 @@ A minimalist desktop Pomodoro timer and music player, built with Electron and va
 
 ## 🖼️ Screenshots
 
-> _Add your screenshots here before publishing — e.g._
-> `![Main timer view](./screenshots/main.png)`
-> `![Settings panel](./screenshots/settings.png)`
+> `![Main timer view](./assets/images/Screenshot.png)`
+> `![Settings panel](./assets/images/Screenshot_2.png)`
 
 ---
 
