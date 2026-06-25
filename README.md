@@ -61,8 +61,8 @@ A minimalist desktop Pomodoro timer and music player, built with Electron and va
 ### Run from source
 
 ```bash
-git clone https://github.com/khoahdinh/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/khoahdinh/in-the-mood-for-study.git
+cd in-the-mood-for-study
 npm install
 npm start
 ```
