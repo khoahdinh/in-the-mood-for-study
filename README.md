@@ -1,12 +1,12 @@
-# 🌸 In The Mood For Study
+# 🎧 In The Mood For Study
 
-A desktop productivity app — Pomodoro timer, music player, and ambient sounds, all wrapped in a soft pink-black aesthetic.
+A minimalist desktop Pomodoro timer and music player, built with Electron and vanilla JavaScript. Designed to help you focus — no browser tabs, no distractions, just a timer, a playlist, and you.
 
-Built with Electron and vanilla JavaScript, as a way to actually _learn_ JS by shipping something real — not just another to-do list tutorial clone.
+![Platform](https://img.shields.io/badge/platform-Windows-blue)
+![Built with](https://img.shields.io/badge/built%20with-Electron-47848F)
+![Status](https://img.shields.io/badge/status-active-success)
 
-![platform](https://img.shields.io/badge/platform-Windows-blue)
-![stack](https://img.shields.io/badge/stack-Electron%20%2B%20Vanilla%20JS-ff2d78)
-![status](https://img.shields.io/badge/status-in%20progress-yellow)
+---
 
 ![screenshot](./assets/images/Screenshot.png)
 ![screenshot](./assets/images/Screenshot2.png)
@@ -14,56 +14,113 @@ Built with Electron and vanilla JavaScript, as a way to actually _learn_ JS by s
 
 ## ✨ Features
 
-- **⏱️ Pomodoro Timer** — fully customizable focus/break intervals, auto long break after N rounds, live progress
-- **🎵 Music Player** — upload your own MP3s, build a playlist, vinyl record that actually spins (and decelerates like a real one when paused)
-- **🔔 Ambient Sounds** — built-in sound options with live preview and independent volume control
-- **🖼️ Background Switcher** — pick from a built-in image library, applied instantly
-- **🌸 Vintage UI** — pink-black theme, cafe conner backdrop, no design system shortcuts
+### ⏱️ Pomodoro Timer
 
-## 🛠️ Tech Stack
+- Full pomodoro cycle: **study → short break → long break** (after N rounds)
+- Fully customizable intervals — set your own study/break lengths and round count
+- Round tracking display (e.g. "Round 2 / 4")
+- Robust timer logic that handles settings changes mid-session without breaking the cycle count
 
-- **Electron** — desktop shell
-- **HTML / CSS / Vanilla JavaScript** — no frameworks, on purpose (this project is the framework-learning step before frameworks)
-- **localStorage** — settings persistence
-- **electron-builder** — packaging into a Windows installer
+### 🔊 Sound
 
-## 🚀 Getting Started
+- Multiple notification sounds to choose from
+- Real-time preview when selecting a sound
+- Independent volume control for notification sounds
+- Sound plays automatically on timer completion
 
-**Just want to try the app?**
-Grab the latest installer from [Releases](../../releases) — download, run, done.
+### 🎵 Music Player
 
-**Want to run it from source?**
+- Upload your own MP3 files to build a custom playlist
+- Add and remove tracks from the playlist
+- Play / Pause / Next / Previous controls
+- Auto-advances to the next track when one ends
+- Smooth, physically-animated vinyl record UI that spins while playing and gradually decelerates when paused
+
+### ⚙️ Settings
+
+- Centralized settings panel with tabs: **General, Timer, Sound, Music**
+- Changes are validated before saving
+
+---
+
+## 🖼️ Screenshots
+
+> _Add your screenshots here before publishing — e.g._
+> `![Main timer view](./screenshots/main.png)`
+> `![Settings panel](./screenshots/settings.png)`
+
+---
+
+## 🛠️ Built With
+
+- **[Electron](https://www.electronjs.org/)** — desktop app shell
+- **HTML / CSS / Vanilla JavaScript** — no frameworks
+- **localStorage** — local data persistence
+- **[Font Awesome](https://fontawesome.com/)** — icons
+- **[Inter](https://rsms.me/inter/)** — typeface (loaded locally)
+- **electron-builder** — packaging into a Windows installer (NSIS)
+
+---
+
+## 📦 Installation
+
+### Run from source
 
 ```bash
-git clone https://github.com/khoahdinh/in-the-mood-for-study.git
-cd in-the-mood-for-study
+git clone https://github.com/khoahdinh/<repo-name>.git
+cd <repo-name>
 npm install
 npm start
 ```
 
-**Want your own installer?**
+### Download the installer
 
-```bash
-npm run dist
-```
+Grab the latest `.exe` from the [Releases](../../releases) page and run the installer. No additional setup required.
 
-The packaged `.exe` will show up in `dist/`.
+---
 
 ## ⚠️ Known Limitations
 
-- **Uploaded playlists don't survive a restart.** Uploaded tracks use temporary blob URLs (`URL.createObjectURL`), which die with the session — they're never written to disk. The correct fix is routing uploads through Electron's IPC to copy files into `app.getPath("userData")`. Flagged here instead of quietly ignored, because pretending a limitation doesn't exist is worse than naming it.
+- **Uploaded playlist doesn't persist across app restarts.** Tracks are loaded using blob URLs, which are only valid for the current app session — closing and reopening the app will clear your playlist. The correct fix is to copy uploaded files into the app's user data folder via Electron's IPC (renderer → main process) instead of relying on blob URLs. This is a planned improvement for a future version.
+- **Background image customization is not yet implemented.** The General settings tab is currently a placeholder for this feature.
+- **Study streak tracking is not yet implemented.**
+- Settings for Timer and Sound are not yet saved to `localStorage` — they currently reset to defaults on app restart. (Note: this is unaffected by the blob URL issue above and is a straightforward addition planned next.)
 
-## 📝 Lessons Learned
+---
 
-- **Cutting scope is a feature, not a failure.** Shuffle, drag-and-drop playlist reordering, and a couple of other nice-to-haves got cut deliberately — not because they were hard, but because they weren't worth the complexity for this app's actual use case.
-- **Naming a limitation beats hiding it.** The blob-URL playlist issue could've been quietly ignored. Writing it down, plus the correct fix (IPC), felt more honest than pretending the app was 100% done.
-- **Reasoning through bugs beats memorizing fixes — but it's worth doing it faster.** Working through this project, the pattern that stood out most was preferring to _understand_ a bug (why two animation loops fight over the same variable, why a blob URL dies on restart) over just pasting a fix. That's the right instinct for actually learning. The next level up is trusting that instinct enough to reason through the first guess with more confidence, instead of double-checking every step before committing to it.
+## 🚧 Roadmap
+
+- [ ] Persist Timer and Sound settings via `localStorage`
+- [ ] Implement IPC-based file persistence for uploaded music (fix playlist reset on restart)
+- [ ] Build out background image feature (built-in library + custom image import)
+- [ ] Build study streak tracker with heatmap and stats
+- [ ] Add Dark / Light / Auto theme mode
+
+---
+
+## 📚 What I Learned
+
+This was my first project working outside of C/C++ and DSA, and my first time building a real desktop application. A few of the bigger lessons:
+
+- **Asynchronous thinking.** Coming from C/C++, I was used to blocking, sequential execution. Learning to think in terms of event listeners, callbacks, and the JS event loop (`setInterval`, `"ended"` events, etc.) instead of blocking loops was a real mental shift.
+- **Animation isn't just CSS.** I initially assumed CSS `@keyframes` could handle the spinning vinyl record, but it can't produce a smooth deceleration when paused. I learned to use `requestAnimationFrame` with manually tracked state (`currentAngle`, `rotationSpeed`) to control the animation frame-by-frame, and to always call `cancelAnimationFrame()` before starting a new loop to avoid multiple animation loops running at once.
+- **Event Delegation.** Re-rendering a playlist with `innerHTML` silently destroys any event listeners attached to the old elements. Instead of re-attaching listeners every time the list changes, I learned to attach a single listener to the parent container and use `event.target.closest()` to figure out which item was actually clicked.
+- **Subtle state bugs.** Distinguishing "nothing is selected" (`null`) from "the first item is selected" (`index 0`) caused a real bug early on — `if (selectedIndex)` evaluates to `false` for `0`. This taught me to be deliberate about initial state values and the difference between "falsy" and "not set."
+- **Off-by-one logic with negative numbers.** Implementing the "Previous track" button taught me that JavaScript's `%` operator can return negative results (unlike how I'd expect modulo to behave), which required an explicit fix to wrap the index around correctly.
+- **Designing for edge cases, not just the happy path.** Timer round-counting needed `<` / `>=` comparisons instead of exact equality (`===`), specifically to handle users changing settings mid-session — a case I wouldn't have thought to test for at first.
+- **Knowing what to cut.** Not every feature idea makes it into a good app. I deliberately scoped out shuffle, drag-and-drop playlist reordering, and custom theme imports — each one added meaningful complexity for relatively little practical benefit at this stage.
+- **Packaging is its own skill.** Getting from "it runs on my machine" to a distributable `.exe` via `electron-builder` involved its own learning curve — configuring the `files` array, setting the app name, and choosing the NSIS target.
+
+---
 
 ## 📄 License
 
-ISC
+This project is open source and available under the [MIT License](LICENSE).
 
-## 🙋 Author
+---
 
-**khoahdinh** — built this while learning JavaScript and Electron from scratch.
-Feedback and bug reports welcome via [Issues](../../issues).
+## 👤 Author
+
+**Luci** ([@khoahdinh](https://github.com/khoahdinh))
+
+Built as a personal project to practice Electron, vanilla JS, and desktop app development.
