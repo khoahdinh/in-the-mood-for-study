@@ -65,7 +65,5 @@ ISC
 
 ## 🙋 Author
 
-## 🙋 Author
-
 **khoahdinh** — built this while learning JavaScript and Electron from scratch.
 Feedback and bug reports welcome via [Issues](../../issues).
