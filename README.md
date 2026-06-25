@@ -8,9 +8,9 @@ Built with Electron and vanilla JavaScript, as a way to actually _learn_ JS by s
 ![stack](https://img.shields.io/badge/stack-Electron%20%2B%20Vanilla%20JS-ff2d78)
 ![status](https://img.shields.io/badge/status-in%20progress-yellow)
 
-![screenshot](./assets/images/screenshot.png)
-![screenshot](./assets/images/screenshot2.png)
-![screenshot](./assets/images/screenshot2.png)
+![screenshot](/assets/images/screenshot.png)
+![screenshot](/assets/images/screenshot2.png)
+![screenshot](/assets/images/screenshot3.png)
 
 ## ✨ Features
 
