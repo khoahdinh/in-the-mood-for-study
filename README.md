@@ -40,8 +40,8 @@ A minimalist desktop Pomodoro timer and music player, built with Electron and va
 
 ## 🖼️ Screenshots
 
-> `![Main timer view](./assets/images/Screenshot.png)`
-> `![Settings panel](./assets/images/Screenshot_2.png)`
+![Main timer view](./assets/images/Screenshot.png)
+![Settings panel](./assets/images/Screenshot_2.png)
 
 ---
 
