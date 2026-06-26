@@ -8,22 +8,22 @@ A minimalist desktop Pomodoro timer and music player, built with Electron and va
 
 ---
 
-## ✨ Features
+## Features
 
-### ⏱️ Pomodoro Timer
+### Pomodoro Timer
 
 - Full pomodoro cycle: **study → short break → long break** (after N rounds)
 - Fully customizable intervals — set your own study/break lengths and round count
 - Robust timer logic that handles settings changes mid-session without breaking the cycle count
 
-### 🔊 Sound
+### Sound
 
 - Multiple notification sounds to choose from
 - Real-time preview when selecting a sound
 - Independent volume control for notification sounds
 - Sound plays automatically on timer completion
 
-### 🎵 Music Player
+### Music Player
 
 - Upload your own MP3 files to build a custom playlist
 - Add and remove tracks from the playlist
@@ -31,21 +31,21 @@ A minimalist desktop Pomodoro timer and music player, built with Electron and va
 - Auto-advances to the next track when one ends
 - Smooth, physically-animated vinyl record UI that spins while playing and gradually decelerates when paused
 
-### ⚙️ Settings
+### Settings
 
 - Centralized settings panel with tabs: **General, Timer, Sound, Music**
 - Changes are validated before saving
 
 ---
 
-## 🖼️ Screenshots
+## Screenshots
 
 ![Main timer view](./assets/images/Screenshot.png)
 ![Settings panel](./assets/images/Screenshot_2.png)
 
 ---
 
-## 🛠️ Built With
+## Built With
 
 - **[Electron](https://www.electronjs.org/)** — desktop app shell
 - **HTML / CSS / Vanilla JavaScript** — no frameworks
@@ -56,7 +56,7 @@ A minimalist desktop Pomodoro timer and music player, built with Electron and va
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Run from source
 
@@ -82,7 +82,7 @@ Grab the latest `.exe` from the [Releases](../../releases) page and run the inst
 
 ---
 
-## 🚧 Roadmap
+## Roadmap
 
 - [ ] Persist Timer and Sound settings via `localStorage`
 - [ ] Implement IPC-based file persistence for uploaded music (fix playlist reset on restart)
@@ -92,7 +92,7 @@ Grab the latest `.exe` from the [Releases](../../releases) page and run the inst
 
 ---
 
-## 📚 What I Learned
+## What I Learned
 
 This was my first project working outside of C/C++ and DSA, and my first time building a real desktop application. A few of the bigger lessons:
 
@@ -113,7 +113,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-## 👤 Author
+## Author
 
 **Luci** ([@khoahdinh](https://github.com/khoahdinh))
 
